@@ -22,7 +22,7 @@
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-analytics.js";
-        import { getDatabase } from "firebase/database";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-database.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
       
@@ -36,7 +36,8 @@
           messagingSenderId: "824676527576",
           appId: "1:824676527576:web:d06cd42b0ed8b99b8f16ad",
           measurementId: "G-68BYVQC2GD",
-          databaseURL: "https://vongquay-98fe7.firebaseio.com",
+          databaseURL: "https://vongquay-98fe7.firebasedatabase.app",
+          
         };
       
         // Initialize Firebase
@@ -44,6 +45,15 @@
         const analytics = getAnalytics(app);
         const database = getDatabase();
         console.log(database);
+
+        function writeUserData(userId, name, email, imageUrl) {
+          const db = getDatabase();
+          set(ref(db, 'users/' + userId), {
+            username: name,
+            email: email,
+            profile_picture : imageUrl
+          });
+        }
       </script>
    </head>
 <div class="pyro">
@@ -270,7 +280,7 @@ $( ".lammoipopupnhantien" ).hover(
       let wheelSpinning = false;
       // ---------------------------------------------------------------------
       // Tải âm thanh đánh dấu và chức năng phát được gọi khi pin đi qua con trỏ.
-      let audio = new Audio('http://dougtesting.net//elements/sound/tick.mp3'); // Tạo đối tượng âm thanh và tải tập tin tick.mp3.
+      let audio = new Audio('sound/tick.mp3'); // Tạo đối tượng âm thanh và tải tập tin tick.mp3.
       
       var dem = 0;
       var demnhantien = 0; // Đếm số lần click vào nút nhận tiền
